@@ -1,0 +1,48 @@
+﻿Requisitos para configurar o SSH
+  . IOS que suporte o SSH
+  . Nome de dispositivo unico
+  . Nome de dominio   
+  . Autenticação local ou serviços AAA.
+
+-- Deve ser alterado o nome do dispositivo
+Router(config)# hostname <nomeDispositivo>
+
+-- Criacao do Dominio
+Router(config)# ip domain-name <nome do domínio>
+
+--Usuario local
+Router(config)# username <nomeU> secret/password<senha>
+
+--Fazer com q as linhas vty funcionem somente com telnet e ssh || Se ficar somente o ssh o telnet nao sera permitido
+Router(config)# line vty 0 15
+Router(config-line)# transport input telnet ssh
+Router(config-line)# login local (Logar com usuario local)
+
+--Gerar criptografia RSA
+Router(config)# crypto key generate rsa [general-keys modulus <modulo-size>]
+    Depois deve-se colocar a quantidade de bits para o modules
+
+-- Trocar a versão
+Router(config)# ip ssh version <1 ou 2>
+
+-- Tempo de inatividade de conexao
+Router(config)# ip ssh time-out 10 (Em segundos)
+
+-- Numero de tentativas de login
+Router(config)# ip ssh authentication-retries <numero>
+
+-- Acessar mediante ssh
+Router# ssh -l usuario ip_destino
+
+-- Verificar 
+Router# sh ssh
+Router# sh ip ssh
+Router# sh crypto key mypubkey rsa
+     NOTA: Se houver chaves duplicadas é recomendado remover com o comando: Router(config)#crypto key zeroize rsa
+
+
+
+
+
+
+

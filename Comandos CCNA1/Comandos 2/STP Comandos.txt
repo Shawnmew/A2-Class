@@ -1,0 +1,74 @@
+﻿Habilitar STP
+ S1(config)#spanning-tree vlan ID
+Desabilitar STP
+ S1(config)#no spanning-tree vlan ID
+
+Mudar o modo
+  S1(config)#spanning-tree mode [pvst,rpvst]
+
+Selecionar root primario e secundario
+ S1(config)#spanning-tree vlan <id-vlan> root primary
+    NOTA::: O valor da prioridade passa para 24576 ou para o valor de diminuição  de 4096.
+ S2(config)#spanning-tree vlan <id-vlan> root secondary
+    NOTA::: O valor da prioridade passa para 28672 
+
+Mudar a prioridade
+ S1(config)#spanning-tree vlan <id-vlan> priority <#prioridade>
+
+Mudar o custo
+ S1(config-if)#spanning-tree vlan <id-vlan> cost <#custo>
+ S1(config-if)#spanning-tree cost <#custo> (Muda o custo de todas as vlans)
+ NOTA::: Para que tenha efeito deve ser feito na interface que esteja no estado blocking. 
+
+Mudar a prioridade de porta
+ S1(config-if)#spanning-tree vlan <id-vlan> port-priority <#prioridade>
+ NOTA::: Para que tenha efeito deve ser feito na interface que esteja no estado forwarding, o custo deve ser o mesmo.
+
+Ativar Portfast
+  S1(config-if)#spanning-tree portfast [default]
+     default: coloca todas as portas acesso como portfast
+Ativar BPDU Guard
+  S1(config-if)#spanning-tree  bpduguard enable|default
+      default: coloca todas as portas portfast com bpduguard.
+Indicar que sera conectado um host
+  S1(config-if)#switchport host
+
+Mudar o estado de uma interface se a outra bloquear
+  S1(config-if)#switchport uplinkfast
+  NOTA:: Mudar direitamente para forwarding, tempo reduzido, em interfaces direitamente conectas.
+  S1(config-if)#switchport backbonefast (para não conectados diretamente).
+
+  NOTA: Se o tipo de STP não for Rapid pvst+ ou RSTP deve-se configurar uplinkfas e backbonefast.
+
+Mudar os timers
+  S1(config-if)#spanning-tree hello-timer <#>
+  S1(config-if)#spanning-tree forward-time <#>
+  S1(config-if)#spanning-tree max-age <#>
+  NOTA:: Deve ser feita no root bridge
+
+Mudar dinamicamente
+  S1(config-if)#spanning-tree vlan 1 root primary diameter
+  S1(config-if)#spanning-tree vlan 1 root secondary diameter
+
+Recuperar de um errdisabale
+  . Desligar e voltar a levantar a interface que tevi o erro
+  ou
+  . Informar a causa
+     S(config)#errdisable recovery cause [causa, pode selecionar o bpduguard]
+  . Intervalo de tento para tentar recuperar
+     S(config)#errdisable recovery interval <30-86400>
+
+
+Não receber informações sobre um novo root bridge em uma interface
+   S(config)#spanning-tree guard root 
+
+
+Verificar instancia de uma vlan ao stp
+ S1#sh spanning-tree vlan ID
+
+Debug
+ S1#debug spanning-tree events
+
+
+Recomendações
+ 

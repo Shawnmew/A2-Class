@@ -1,0 +1,37 @@
+### Criar as Vlans
+S2(config)#vlan <id_vlan>
+
+### Atribuir um nome a VLAN
+S2(config-vlan)#name <nome_vlan>
+
+### Colocar as portas no modo de acesso
+S2(config-if)#switchport mode access
+
+### Colocar as portas no modo de tronco
+S2(config-if)#switchport mode trunk
+
+### Associar a porta a uma vlan
+S2(config-if)#switchport access vlan <id-vlan>
+
+### Vlan Nativa
+S1(config-if)#switchport trunk native vlan <id-vlan> 
+
+### Permitir trafego de Vlans no tronco
+S1(config-if)#switchport trunk allowed vlan <id-vlan ou id-vlanX,..., VlanN> 
+
+### Visualizações 
+S1#sh int <tipo-interface> switchport
+S1#sh vlan brief
+S1#sh vlan summary
+
+
+### Roteamento inter-vlan (Router-on-styck)
+R(config)#interface <interface>
+R(config-if)#no shut
+R(config-if)#interface <interface>.<#>
+R(config-sub-if)#encapsulation dot1q <id_vlan>
+R(config-sub-if)#ip address <ip> <mask>
+
+
+###É preciso configurar as interfaces dos links dos outros dispositivos conectados ao S1 para funcionarem como trunk e mudar a vlan nativa
+###Por defeito ela fica como dynamic auto e a vlan nativa a padrao(vlan1) 

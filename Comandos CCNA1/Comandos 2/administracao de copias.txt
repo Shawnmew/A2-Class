@@ -1,0 +1,22 @@
+Administração de copias de segurança
+
+### -- Arquivo em execução para tftp -- ###
+S1#copy run tftp:
+
+### -- tftp para Arquivo em execução -- ###
+S1#copy tftp: run
+
+### -- Arquivo em execução para usb -- ###
+S1#copy run usbflash[Nome da usb]
+
+### -- usb para Arquivo em execução -- ###
+S1#copy usbflash1[Nome da usb]: run
+
+### -- Arquivo em execução para flash -- ###
+S1#copy run flash:
+
+### -- flash para Arquivo em execução -- ###
+S1#copy flash:[Nome do arquivo] run
+
+### -- Verificar os sistemas de arquivos
+s1#show file systems

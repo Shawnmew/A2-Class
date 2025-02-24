@@ -1,0 +1,40 @@
+Existem dois metodos de se obter endereços dinamicamente
+  . SLAAC : faz o uso de mensagens de anuncio do roteador (RA(FF02::1,prefixo e o cumprimento) e RS(FF02::2)). NOTA:: As mensagens de RA são enviadas periodicamente, em cada 200 s ou quando o roteador recebi um mensagem de RS.
+  . DHCP : um servidor de DHCP presta este serviço aos hosts.  
+
+
+O SLAAC é o metodo padrão nos roteadores CISCO, para o SLAAC os valores das flags M e O devem ser 0, se por algum motivo os valores tiverem sido alterados e se pretende configurar o SLACC deve-se voltar as configurações padrão (M=0,O=0)
+  Router(config-if)# no ipv6 nd managed-config-flag 
+  Router(config-if)# no ipv6 nd other-config-flag 
+
+Ativar o DHCP Statless o O deve ser 1 e o M é 0
+  Router(config-if)#ipv6 nd other-config-flag   
+
+Ativar o DHCP Statefull o M deve ser 1
+  Router(config-if)# ipv6 nd managed-config-flag 
+
+
+Por padrão, o comando ip helper-address encaminha os seguintes oito serviços UDP:
+	Porta 37: tempo
+	Porta 49: TACACS
+	Porta 53: DNS
+	Porta 67: cliente de DHCP/BOOTP
+	Porta 68: servidor de DHCP/BOOTP
+	Porta 69: TFTP
+	Porta 137: serviço de nomes NetBIOS
+	Porta 138: serviço de conjunto de dados NetBIOS
+
+ ip address dhcp
+
+ debug ip dhcp server events
+ debug ip packet
+
+
+Visualizações
+  show running-config | section dhcp
+  show ip dhcp binding
+  show ip dhcp server statistics
+
+ipconfig /release
+ipconfig /renew
+

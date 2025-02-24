@@ -1,0 +1,11 @@
+﻿#### Tempo de inatividade (para consolas e vty)
+  Router(config-line)#exec-timeout <minutos>
+
+#### Minimo de Senhas
+   Router(config)#security password min-length <#>
+
+#### Bloquer ataques de força bruta
+   Router(config)#login block-for <segundo de bloqueio> attempts <# tentativas> within <segundos que se tentara o acesso>
+
+
+   login delay seconds

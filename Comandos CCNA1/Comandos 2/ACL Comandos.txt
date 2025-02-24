@@ -1,0 +1,43 @@
+﻿#### ACL Padrão
+  . Criar
+	  Router(config)#access-list <idACL> {permit|deny|remark} <rede|host> <wildcard> log
+	        permit:para permitir a passagem
+	        deny:para bloquear a passagem
+	        remark:para dar uma descrição na ACL
+	        log:para que sejam mostrados logs na consola quando houver uma correspondência no endereço IP destino do pacote com o da ACL.
+   . Criar uma padrão nomeada
+      Router(config)#ip access-list standard <nome>
+      Router(config-std-nacl)#{idACL|permit|deny|remark} <rede|host> <wildcard>
+
+#### ACL Extendida
+   . Criar ACL
+       Router(config)#access-list <idACL> {permit|deny|remark} <protocolo> <redeOrigem|hostOrigem> <wildcardOrigem> <redeDest|hostDest> <wildcardDest> <operador> <port|protocolo> [established] [log]
+       Operador: lt=menor que,gt=maior que, eq=igual, neq=diferente,range=intervaloPortas
+       established:para conexões TCP, para conexões já estabelecidas, permit que o destinatario responda.
+       log:registra os incidentes
+
+       Router(config)#access-list <id> permit ip any any =>para permitir todos os outros.
+   . Extendida Nomeada
+       Router(config)#ip access-list extended <nome>
+       Router(config)#{id|permit|deny|remark} <protocolo> <redeOrigem|hostOrigem> <wildcardOrigem> <redeDest|hostDest> <wildcardDest> <operador> <port|protocolo> [established]
+
+#### Aplicar na interface
+      Router(config-if)#ip access-group <idACL> {in|out}
+#### Aplicar na linha vty
+      Router(config-line)#access-class <idACL> in
+
+#### ACL IPv6
+      . Criação ACL IPv6
+          Router(config)#ipv6 access-list <nomeACL>
+      . Criação ACL
+          Router(config-ipv6-acl)#{deny|permit} <protocolo> <redeOr|hostOr>/prefixo-length <redeDest|hostDest>/prefixo-length <operador> <porta>    
+      . Aplicar na interface
+          Router(config-if)#ipv6 traffic-filter <nomeACL> {in|out} 
+      
+
+#### Visualizações
+      Router#sh access-lists
+      Router#sh run
+
+
+

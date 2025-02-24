@@ -1,0 +1,31 @@
+
+Etapas a seguir para configurar o HSRP:
+  . Entrar na interface LAN dos hosts, ativar e dar um ip diferente do ip virtual
+  . Configure a versão 2 do HSRP.
+     Router(config-if)#standby version <1|2>
+
+  . Configure o endereço IP virtual do grupo.
+     Router(config-if)#standby <id-grupo> ip <IP-Virtual>
+
+  . Configure a prioridade do roteador ativo desejado para que ela seja maior do que 100.
+     Router(config-if)#standby <id-grupo> priority <#>
+       NOTA:: Por padrão a prioridade é 100.
+
+  . Configure o roteador ativo para que tenha prioridade sobre o roteador de standby caso o roteador ativo fique on-line após o roteador em standby.
+     Router(config-if)#standby <id-grupo> preempt
+  
+  . Mudar o nome do grupo (Opcional)
+     Router(config-if)#standbay <id-grupo>  name  <nome-grupo>
+  . O gateway dos hosts deve ser o ip virtual.
+
+Visualização
+  . R#show standby
+  . R#show standby brief
+
+Debug
+  . R#debug standby
+  . R#debug standby errors
+  . R#debug standby events
+  . R#debug standby packets
+  . R#debug standby terse (qd esta p/ se tornar ativo)
+  . R#debug standby display

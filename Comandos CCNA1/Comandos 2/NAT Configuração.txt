@@ -1,0 +1,47 @@
+﻿. Nat Estatico
+  R1(config)#ip nat inside source static <ip-privado> <ip-publico>
+
+. Interface de Entrada e de Saída
+	R1(config)# interface <interface>
+	R1(config-if)# ip nat <inside/outside>
+
+. NAT DInamico
+   . Lista de acesso
+       R1(config)#acess-list <#> <permit> <rede/host>
+   . Pool do NAT
+       R1(config)#ip nat pool <nome_POOL> <ip-start> <ip-end> netmask <mask>
+   . Vincular a lista de acesso e o pool
+       R1(config)#ip nat inside source list <# ACL> pool <nome_pool>
+
+. PAT para um pool 
+   . Lista de acesso
+       R1(config)#acess-list <#> <permit> <rede/host>
+   . Pool do NAT
+       R1(config)#ip nat pool <nome_NAT> <ip-start> <ip-end> netmask <mask>
+   . Vincular a lista de acesso e o pool
+       R1(config)#ip nat inside source list <# ACL> pool <nome_pool> overload
+
+. PAT para um unico endereço (interface conectada ao ISP)
+   . Lista de acesso
+       R1(config)#acess-list <#> <permit> <rede/host>
+   . Associação a interface  e a ACL
+       R1(config)#ip nat inside source list <# ACL> interface <interface> overload
+
+Emcaminhamento de portas
+   . R1(config)#ip nat inside source static <tcp|udp> <ip-local> <portas-local> <ip-externo> <porta-externa>
+
+. Ver as traduções
+    R1#show ip nat translations
+. Ver a estatistica
+    R1#show ip nat static
+.Limpar o NAT
+   R1#clear ip nat translation
+   R1#clear ip nat static
+
+
+
+
+
+
+
+

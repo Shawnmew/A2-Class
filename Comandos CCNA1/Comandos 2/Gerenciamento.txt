@@ -1,0 +1,129 @@
+﻿Por padrão os dispositivos como roteadores e switchs tem como fonte de tempo o do sistema.
+É importante que a hora esteja precisa, pois as horas e as datas são importantes no gerenciamento e manutenção de uma infraestrutura de rede. 
+
+
+Há duas formas de configurar data e hora
+  . Manualmente por intermedio do comando clock set
+  . Configurando um protocolo de tempo de rede (NTP) [+ recomendado].
+      Os clientes se conectam ao servidor de tempo e sincronizam-se com o mesmo para obter informação de tempo preciso.
+
+As redes NTP usam um sistema hierárquico de fontes de horário. Cada nível desse sistema hierárquico é denominado stratum. O nível do stratum é definido como o número de contagens de saltos da fonte oficial. O horário sincronizado é distribuído através da rede usando o NTP.
+
+Stratum 0 : fonte oficial
+Stratum 1 : colectam a fonte e podem prestar a outros stratum
+Stratum 2 : clientes NTP
+
+
+#### Referenciar o servidor NTP #######
+  R(config)#ntp server 10.1.1.1
+
+#### Definir como servidor ##########
+  R(config)#ntp master
+
+#### Verificar as associações ########
+  R#sh ntp associations
+#### Verificar o status #######
+  R#sh ntp status
+#### Verificar o tempo e a fonte #######
+  R#sh clock detail
+
+
+
+Syslog
+  . Protocolo usado para colheta de mensagens de eventos na rede
+  . Com o Syslog é possivel
+    . Capiturar as notificações do sistema afim de solucionar problemas de rede
+    . Mandar as notificações para um dispositivo especifico (servidor syslog).
+    . Selecionar o tipo de mensagem capiturada.
+
+  . Distinos mais comuns de mensagens de Syslog
+    . Buffer interno (Memoria RAM)
+    . Linha de consola
+    . Linha do terminal
+    . Servidor Syslog
+  . Mensagens syslog
+    . 0 a 4 - criticos, notificações de problemas no software ou hardware.
+    . 5 - Notificações do sistema, se uma interface mudar para up/down
+    . 6 - Informações do sistema
+    . 7 - depuração.
+
+    0 - Emergency : o sistema pode não ser funcional
+    1 - Alert : se requer imediata ação
+    2 - Critical : um evento critico se há apresentado
+    3 - Error : O dispositivo apresentou um erro
+    4 - Warning : uma condição poderia requer atenção
+    5 - Notification : normal mas ocorreu uma condição
+    6 - Informational : um evento normal ocorreu
+    7 - Depuração : comando debug 
+
+
+
+###### Forçar as mensagens syslog a terem o tempo #######
+     R(config)#service timestamps log datetime msec
+##### Configuração do cliente Syslog ######
+     R(config)#logging <ip-servidor>
+     R(config)#logging trap <nivel>
+     R(config)#logging source-interface <interface> [interface cujo o ip estara no pacote de origem]
+
+
+##### Forçar as mensagens a terem data e hora 
+     R(config)#service timestamps log datetime msec
+
+##### Visualizar as mensagens no buffer ########
+     R#sh logging
+
+##### Vizualizar logs da consola em uma sessão de terminal (telnet, SSH)
+     R(config)#terminal monitor
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

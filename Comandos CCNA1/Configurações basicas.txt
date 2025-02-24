@@ -1,0 +1,66 @@
+﻿### Banner ###
+Router(config)#banner motd #Mensagem#
+
+### Desativar buscas DNS ###
+Router(config)#no ip domain-lookup
+
+### Mudar o nome do dispositivo ###
+Router(config)#hostname <nome>
+
+### Senha da consola ###
+Router(config)#line console 0
+Router(config-line)#password <senha>
+Router(config-line)#login
+
+### Senha da vty ###
+Router(config)#line vty 0 4
+Router(config-line)#password <senha>
+Router(config-line)#login
+
+### Senha do privilegiado#
+Router(config)#enable [secret/password] <senha>
+     secret: criptografa a senha
+     password: não criptografa a senha
+
+### Criptografar todas as senhas
+Router(config)#service password-encryption
+
+### Atribuir um endereço IP em uma interface ###
+Router(config-if)#ip address <ip> <mascara>
+
+### Ativar a interface ###
+Router(config-if)#no shutdown
+
+### Descrição na interface ###
+Router(config-if)#description <descricao>
+
+### Salvar
+ Router#copy running-config startup-config
+ou 
+ Router#copy run star
+ou 
+ Router#wr
+
+### Mostrar as configurações
+ Router#show run
+        show running-config
+
+### Eliminar o arquivo de configuração de inicio da NVRAM ###
+Router#erase startup-config
+
+### Reiniciar ###
+Router#reload
+
+### Informações sobre o despositivo ###
+Router#show version
+
+### Informações do relogio
+Router#show clock
+
+### Mudar o time ###
+Router#clock set <hh:mm:ss> <mes> <dia> <ano>
+
+### Verificar o historico ###
+  Router#show history 
+### Mudar o tamnho das linhas mostradas no historico ###
+  Router#terminal history size <#>
