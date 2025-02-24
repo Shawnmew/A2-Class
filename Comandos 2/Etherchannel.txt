@@ -1,0 +1,42 @@
+Etherchannel
+
+criar port-channel
+S1(config)# interface port-channel <1>
+
+  Cada porta se configura independente antes de integra-lo a qualquer port-channel
+  Se pode associar uma interface a um port-channel sem cria-lo anteriormente, cria-se automaticamnet.
+
+Associar portas ao port-channel
+  S1(config)# interface range <tipo-interface> <intervalo-portas>
+  S1(config-if-range)# channel-protocol <pagp/lacp> 
+  S1(config-if-range)# channel-group <numero-portchannel> mode <desirable|auto|active|passive|on>
+  S1(config-if-range)# no shutdown
+  NOTA: Os portchannel devem estar no modo trunk 
+        O comando channel-protocol é desnecessario, pois ao colocar o modo da porta já se define que tipo de protocolo sera usado.
+
+Habilitar load-balance
+S1(config)# port-channel load-balance <type>
+
+verificações
+S1#show etherchannel summary
+S1#show etherchannel port-channel
+S1#show interfaces port-channel <numero-portchannel>
+S1#show interfaces <tipo-interface> etherchannel
+
+------------------------------------------------------
+Configurar EtherChannel em SW de nvel 3
+
+S1(config)# interface range fastEthernet <0/11 - 12>
+S1(config-if-range)# no switchport 
+S1(config-if-range)# channel-group <2> mode desirable 
+
+Criar o Port-channel 2
+S1(config-if-range)# interface port-channel 2 
+S1(config-if)# no switchport 
+S1(config-if)# ip address <10.0.0.1 255.255.255.0> 
+
+Se configuram ambos os lados do enlace (S2 -> 10.0.0.2/24)
+
+Verificar
+S1# ping 10.0.0.2
+ok!!!

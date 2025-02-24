@@ -1,0 +1,80 @@
+﻿### Definir o A com 0
+R(config-if)#ipv6 nd prefix default no-autoconfig 
+
+Configurar DHCPv6 Stateless
+  . Ativar o roteamento 
+       R(config)#ipv6 unicast-routing
+  . Criar o pool
+       R(config)#ipv6 dhcp pool <nome_pool>
+  . Servido DNS
+       R(config-dhcpv6)#dns-server <ip-servidor>
+  . Dominio
+       R(config-dhcpv6)#domain name <nome-dominio>   
+  . Configurar a interface
+       R(config-if)#ipv6 dhcp server <nome-pool>
+       R(config-if)#ipv6 nd other-config-flag 
+
+Cliente DHCP Stateless
+  R(config-if)#ipv6 enable
+  R(config-if)#ipv6 add autoconfig
+
+DHCPv6 Statefull
+  . Ativar o roteamento (Fazer com que o roteador mande mensagens RA)
+       R(config)#ipv6 unicast-routing
+  . Criar o Pool
+       R(config)#ipv6 dhcp pool <nome_pool>
+  . Prefixo
+       R(config-dhcpv6)#address prefix <ipv6> 
+  . Servido DNS
+       R(config-dhcpv6)#dns-server <ip-servidor>
+  . Dominio
+       R(config-dhcpv6)#domain name <nome-dominio>
+  . Configurar as interfaces
+       R(config-if)#ipv6 dhcp server <nome-pool>
+       R(config-if)#ipv6 nd managed-config-flag
+
+
+### Cliente DHCP
+   R(config-if)#ipv6 add dhcp
+
+### Agente de retransmissão
+  R(config-if)#ipv6 dhcp relay destination <ipv6>
+ 
+### Fazer com que o Switch suporte IPv6
+  S1(config)#sdm prefer dual-ipv4-and-ipv6 default
+
+
+
+Sh ipv6 int g0/0 | begin nd
+sh ipv6 dhcp pool
+sh ipv6 dhcp binding
+sh ipv6 dhcp interface
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+R(config)#ipv6 local pool <nome-pool> <prefixo> <tamanho do prefixo> 
+R(config-if)#ipv6 dhcp server <nome-pool> {Na interface do roteador associado a LAN}
+
+
+
+
+
+
+
+
+
+

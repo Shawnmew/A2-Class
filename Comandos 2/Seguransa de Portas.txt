@@ -1,0 +1,51 @@
+﻿Tipos de endereços MAC protegidos
+  . Endereços MAC estáticos seguros: endereços MAC configurados manualmente em uma porta por meio do 
+  switchport port-security mac-address mac-address, que é o comando no modo de configuração de interface. Os endereços MAC configurados dessa forma são armazenados na tabela de endereços e adicionados à configuração
+  em execução no switch.
+  . Endereços MAC com segurança sticky - endereços MAC que podem ser aprendidos dinamicamente ou configurados manualmente e, depois, armazenados na tabela de endereços e adicionados à configuração de execução.
+
+Modos de Violação
+  . Protect (Protegido) - quando o número de endereços MAC seguros atinge o limite permitido na porta, os pacotes com endereços origem desconhecidos são descartados até que um número suficiente de endereços MAC seguros seja removido ou o número máximo dos endereços permitidos seja aumentado. Não há notificações de ocorrência de violações de segurança.
+  . Restrict (Restrito) - quando o número de endereços MAC seguros atinge o limite permitido na porta, os pacotes com endereços origem desconhecidos são descartados até que um número suficiente de endereços MAC seguros seja removido ou o número máximo dos endereços permitidos seja aumentado. Neste modo, há uma notificação quando ocorre uma violação de segurança.
+  . Shutdown (Desligado) – neste modo (padrão), uma violação de segurança de porta faz com que a interface se torne imediatamente desativada por erro e desativa o LED de porta. Ele incrementa o contador de violação. Quando uma porta segura está em estado de desativação por erro, ela pode ser tirada desse estado inserindo o comando de modo de configuração de interface shutdown seguido do comando no shutdown.
+
+  Para alterar o modo de violação em uma porta do switch, use o comando do modo de configuração de interface switchport port-security violation {protect | restrict | shutdown}.
+
+. Colocar a porta no modo de acesso
+S1(config-if)#switchport mode access
+
+. Ativa a segurança de porta
+S1(config-if)#switchport port-security
+
+. Aprender os endereços MAC
+S1(configif)#Switchport port-security mac-address sticky
+
+. Numero maximo de endereços MAC
+S1(config-if)#switchport port-security maximum 2
+
+. Violação
+S1(config-if)#switchport port-security violation shutdown
+
+. Visualizações
+show port-security interface [interface-id]
+show port-security address. 
+
+NOTA: Por padrão o modo de violação é shutdown
+
+
+~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

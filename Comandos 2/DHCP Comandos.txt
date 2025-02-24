@@ -1,0 +1,39 @@
+﻿
+### Criar o pool
+  R(config)#ip dhcp pool <nomePool>
+
+### Definir a rede
+  R(dhcp-config)#network <rede> <mascara>
+
+### Definir o gateway
+  R(dhcp-config)#default-router <ip-gateway>
+
+### Definir o servidor de DNS
+  R(dhcp-config)#dns-server <ip-servidor-dns>
+
+### Exluir endereços
+  R(config)#ip dhcp excluded-address <ip|ip1 ipn> 
+
+### Configura um retrasmissor DHCP
+  R(config-if)#ip helper-adress <ip do servidor>
+     NOTA::: Deve ser configurado na interface mas proxima do solicitante
+
+### Definir uma interface como cliente dhcp
+  R(config-if)#ip address dhcp
+
+
+### Visualizações
+  R#show dhcp binding  
+  R#show dhcp server statistics
+  R#show running-config | section dhcp 
+
+
+
+
+
+
+
+
+
+
+             Para especificar as portas adicionais, utiliza-se o comando ip forward-protocol para especificar exatamente quais tipos de pacotes de broadcast serão encaminhados.

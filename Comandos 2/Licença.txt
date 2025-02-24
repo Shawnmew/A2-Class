@@ -1,0 +1,19 @@
+﻿
+
+. IOS - Internetwork Operational System 
+. Existe um IOS por cada modelo de roteador em particular (Versão e Release).
+. Release : são as pequenas mudanças que se da a um IOS
+. Os IOS sã.o desenvolvido segundo o hardware do dispositivo e segundo as caracteristicas que o sistema devera ter.
+. Os IOS eram originais para cada um ou mais feature há um IOS.
+. Nos IOS novos, os universal, possuem todas as feature, ipbase (padrão), data, security, comunication unificate.
+. Para ativar cada um dos feature é preciso uma licensa.
+. Formas de ativar um IOS
+    . Ativação automatica com o CISCO Licende Manager (CLM)
+    . Manual   912676163
+
+
+Instalar uma licensa permanente
+  R#license install flash:NomeArquivo.lic
+
+Instalar uma licensa temporal
+  R(config)#license boot module <serie> technology package <feature>

@@ -1,0 +1,19 @@
+﻿R1(config)#router rip
+
+#### mudar a versão ####
+R1(config-router)#version 2
+
+#### Desativar sumarização automatica ####
+R1(config-router)#no auto-summary
+
+#### Anucnciar as redes ####
+R1(config-router)#network <rede>
+
+#### Interface Passiva ######
+R1(config-router)#passive-interface default
+
+#### Propagar uma rota padrão ######
+R1(config-router)#default-information originate
+
+##### Informações do protocolo de roteamento ####
+R1#sh ip protocols

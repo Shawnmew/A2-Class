@@ -1,0 +1,39 @@
+##### Criar vlan ######
+S1#vlan database
+S1(vlan)#vlan <idVLAN> name <nomeVLAN>
+.. Criar outra VLAN
+S1(vlan)#vlan <idVLAN> name <nomeVLAN>
+ou
+S1(config)#vlan <idVLAN>
+S1(config-vlan)#name <nomeVLAN>
+.. Criar outra VLAN
+S1(config-vlan)#vlan <idVLAN>
+S1(config-vlan)#name <nomeVLAN>
+
+#### Definir a porta como acess ######
+S1(config-if)#switchport mode acess
+
+#### Definir uma porta como tronco ######
+S1(config-if)#switchport mode trunk
+
+### Associar uma porta a uma VLAN
+S1(config-if)#switchport acess vlan <idVLAN> 
+
+### Definir as vlan permitidas no tronco
+S1(config-if)#switchport trunk allowed vlan <idVLAN ou idVLANs>
+
+### Definir a vlan nativa ####
+S1(config-if)#switchport trunk native vlan <idVLAN>
+
+.. Verificações
+### Verificar as vlans criadas e as portas associadas
+  S1#show vlan [brief]
+### Informações das portas trunk
+  S1#show interface trunk
+
+
+
+
+
+ 
+

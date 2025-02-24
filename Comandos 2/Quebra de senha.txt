@@ -1,0 +1,9 @@
+- Entrar no modo romon 
+- Trocar o registo para 0x2142 (confreg 0x2142)
+- Reiniciar o dispositivo (reset)
+- Se se pretende eliminar as configurações
+      . Elimianar o arquivo da nvram (wr e)
+- Se se pretende manter as configurações
+      . Copiar o arquivo da nvram para a ram (copy star run)
+      . Definir as novas senhas
+- Definir o registo com o valor padrão (Router(config)#config-register 0x2102) 

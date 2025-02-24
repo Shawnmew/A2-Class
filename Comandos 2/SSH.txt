@@ -1,0 +1,32 @@
+-- Deve ser alterado o nome do dispositivo
+R1(config)# hostname <nome>
+
+-- Criacao do Dominio
+R1(config)# ip domain-name <nome_dominio>
+
+--Usuario local
+R1(config)# username <nome_user> privilege 15 secret <senha>
+
+--Fazer com q as linhas vty funcionem somente com telnet e ssh || Se ficar somente o ssh o telnet nao sera permitido
+R1(config)# line vty 0 4
+R1(config-line)# transport input [telnet,ssh] 
+R1(config-line)# login local(Logar com usuario local)
+
+--Gerar criptografia RSA
+R1(config)# crypto key generate rsa
+    Depois deve-se colocar a quantidade de bits para o modules
+
+-- Tempo de tentativa de conexao
+R1(config)# ip ssh time-out <time> (Em segundos)
+
+-- Quantidade de conexoes consecutivas
+R1(config)# ip ssh authentication-retries <qtd_conexoes>
+
+--- Definir a versão
+R1(config)#ip ssh version <#>
+
+-- Acessar mediante ssh
+R1# ssh -l usuario ip_destino
+
+-- Verificar 
+R1# sh ip ssh

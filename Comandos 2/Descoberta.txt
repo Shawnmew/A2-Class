@@ -1,0 +1,49 @@
+CDP
+  . CISCO Discover Protocol : protocolo L2 da CISCO, usado para colheta de informações entre dispositivos que compartilham o mesmo link. 
+  . São obtidas informações como tipo de dispositivo, nome, tipo e numero da interface.
+  . Os anuncios são enviados periodicamente.
+  . Por defeito o CDP já fica activo nos dispositivos CISCO.
+  . Por razão de segurança pode ser que seja necessario desativar o CDP, de modo que um invasor não consiga obter informações sobre o nosso dispositivo.
+
+  #### Activar CDP em todo dispositivo ######
+    R(config)#cdp run
+  #### Desativar CDP em todo dispositivo ######
+    R(config)#no cdp run
+  #### Activar CDP em uma interface ######
+    R(config-if)#cdp enable
+  #### Desativar CDP em uma interface ######
+    R(config-if)#no cdp enable
+  #### Obter informações do CDP ######
+    R#sh cdp
+  #### Obter informações dos visinhos CDP ######
+    R#sh cdp neighbors
+  #### Obter informações mais detalhadas dos visinhos CDP ######
+    R#sh cdp neighbors detail
+  #### Obter informações das interfcaes CDP ######
+    R#sh cdp interface
+  
+  
+LLDP
+  . Link Layer Discover Protocol: protocolo de discoberta de visinho independente de fabricante, semelhante ao CDP.
+  . Os dispositivos CISCO suportam anuncios de LLDP de dispositimvo de outro fabricante. 
+
+  #### Activar LLDP em todo dispositivo ######
+    R(config)#lldp run
+  #### Desativar CDP em todo dispositivo ######
+    R(config)#no lldp run
+  #### Fazer com que as interfaces recebam e enviem anuncios LLDP
+     R(config-if)#lldp receive
+     R(config-if)#lldp transmite
+
+
+     
+
+
+
+
+
+
+
+
+
+

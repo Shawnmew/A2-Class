@@ -1,0 +1,23 @@
+//Rotas Estaticas IPv6
+
+#Rota Estatica
+ R(config)#ip route <rede_remota> <mascara> <saída> [Distância administrativa]
+     Saída
+         . Interface de saída: rota estatica diretamente conectada
+         . IP do proximo salto: rota estatica recursiva ou de proximo salto
+         . Interface de saída e IP do proximo salto: rota estatica totalmente especifica
+
+#Rota Estatica Padrão
+   R(config)#ip route 0.0.0.0 0.0.0.0 <saída> [Distância administrativa]
+
+
+//Rotas Estaticas IPv4
+#Rota Estatica
+ R(config)#ipv6 route <rede_remota>/P <saída> [Distância administrativa]
+     Saída
+         . Interface de saída: rota estatica diretamente conectada
+         . IPv6 do proximo salto: rota estatica recursiva ou de proximo salto
+         . Interface de saída e IPv6 do proximo salto: rota estatica totalmente especifica
+
+#Rota Estatica Padrão
+   R(config)#ipv6 route ::/0 <saída> [Distância administrativa]
